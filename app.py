@@ -1,6 +1,7 @@
 import streamlit as st
 import snowflake.connector
 import pandas as pd
+
 from langchain.agents import initialize_agent, AgentType
 from langchain_core.tools import Tool
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -95,7 +96,6 @@ CRITICAL RULES - FOLLOW STRICTLY:
 7. Always return the query results formatted as clean Markdown tables.
 """
 
-# Configure LLM (Ensure GEMINI_API_KEY is set in st.secrets or environment)
 llm = ChatGoogleGenerativeAI(
     model="gemini-1.5-flash",
     google_api_key=st.secrets.get("GEMINI_API_KEY", None),
@@ -110,7 +110,7 @@ agent = initialize_agent(
     agent_kwargs={"prefix": system_instructions}
 )
 
-# 5. Streamlit Interactive Interface
+# 5. Streamlit Chat Interface
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
